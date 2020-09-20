@@ -1,15 +1,23 @@
-import requests, json
+import json
+import requests
 
 url = 'https://www.instagram.com/graphql/query'
+
 url_postingan = input('Silakan masukkan url postingan:')
+
 variabel = {"shortcode": url_postingan, "first": 50}
+
 parameter = {
     'query_hash': 'd5d763b1e2acf209d62d22d184488e57',
     'variables': json.dumps(variabel)
 }
+
 r = requests.get(url, params=parameter).json()
+
 para_pengguna = r['data']['shortcode_media']['edge_liked_by']['edges']
+
 hitung = 0
+
 for pengguna in para_pengguna:
     nama_pengguna = pengguna['node']['username']
     nama_panjang = pengguna['node']['full_name']
